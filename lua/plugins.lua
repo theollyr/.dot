@@ -98,6 +98,7 @@ return require('packer').startup(function()
             kmap('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<CR>")
             kmap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<CR>")
             kmap('n', '<leader>fg', "<cmd>lua require('telescope.builtin').git_files()<CR>")
+            kmap('n', '<leader>fs', "<cmd>lua require('telescope.builtin').git_status()<CR>")
             kmap('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<CR>")
             kmap('n', '<leader>ft', "<cmd>lua require('telescope.builtin').tags()<CR>")
         end
