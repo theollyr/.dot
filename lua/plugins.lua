@@ -72,20 +72,12 @@ return require('packer').startup(function()
             }
 
             require('telescope').setup({
-                defaults = {
+                defaults = require('telescope.themes').get_ivy({
                     mappings = {
                         i = remap_preview_scrolls,
                         n = remap_preview_scrolls,
                     },
-                },
-
-                pickers = {
-                    buffers = { theme = "ivy", },
-                    find_files = { theme = "ivy", },
-                    git_files = { theme = "ivy", },
-                    help_tags = { theme = "ivy", },
-                    tags = { theme = "ivy", },
-                },
+                }),
 
                 extensions = {
                     fzf = {
