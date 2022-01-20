@@ -164,7 +164,14 @@ return require('packer').startup(function()
         'tanvirtin/vgit.nvim',
         requires = 'nvim-lua/plenary.nvim',
         config = function()
-            require('vgit').setup()
+            require('vgit').setup({
+                keymaps = {
+                    ['n [c'] = 'hunk_up',
+                    ['n ]c'] = 'hunk_down',
+                    ['n <leader>hp'] = 'buffer_hunk_preview',
+                    ['n <leader>hs'] = 'buffer_hunk_stage',
+                },
+            })
         end
     }
 
