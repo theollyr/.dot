@@ -179,8 +179,8 @@ return require('packer').startup(function()
                     ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" },
                     ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" },
 
-                    ['n hp'] = '<cmd>Gitsigns preview_hunk<CR>',
-                    ['n hs'] = '<cmd>Gitsigns stage_hunk<CR>',
+                    ['n <leader>hp'] = '<cmd>Gitsigns preview_hunk<CR>',
+                    ['n <leader>hs'] = '<cmd>Gitsigns stage_hunk<CR>',
                 },
 
                 current_line_blame = true,
