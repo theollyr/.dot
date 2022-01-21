@@ -54,6 +54,18 @@ return require('packer').startup(function()
             vim.opt.termguicolors = true
 
             vim.cmd [[colorscheme gruvbox]]
+
+            local diff_colors = {
+                DiffAdd = '#34381b',
+                DiffDelete = '#402120',
+                DiffText = '#3b2d17',
+                DiffChange = '#0e363e',
+            }
+
+            for hig, bg in pairs(diff_colors) do
+                vim.cmd('hi clear ' .. hig)
+                vim.cmd(string.format("hi %s guibg=%s", hig, bg))
+            end
         end
     }
 
