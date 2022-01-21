@@ -154,17 +154,34 @@ return require('packer').startup(function()
     }
 
     use {
-        'tanvirtin/vgit.nvim',
+        'lewis6991/gitsigns.nvim',
         requires = 'nvim-lua/plenary.nvim',
+        tag = 'release',
         config = function()
-            require('vgit').setup({
+            require('gitsigns').setup({
+                signcolumn = true,
+
                 keymaps = {
-                    ['n [c'] = 'hunk_up',
-                    ['n ]c'] = 'hunk_down',
-                    ['n <leader>hp'] = 'buffer_hunk_preview',
-                    ['n <leader>hs'] = 'buffer_hunk_stage',
+                    noremap = true,
+
+                    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" },
+                    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" },
+
+                    ['n hp'] = '<cmd>Gitsigns preview_hunk<CR>',
+                    ['n hs'] = '<cmd>Gitsigns stage_hunk<CR>',
+                },
+
+                current_line_blame = true,
+                current_line_blame_opts = {
+                    virt_text = true,
+                    delay = 5000,
+                },
+                current_line_blame_formatter_opts = {
+                    relative_time = true,
                 },
             })
+
+            vim.cmd [[hi! link GitSignsCurrentLineBlame Comment]]
         end
     }
 
