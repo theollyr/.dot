@@ -197,6 +197,14 @@ return require('packer').startup(function()
     }
 
     use {
+        'tpope/vim-fugitive',
+        config = function()
+            kmap('n', '<leader>ds', "<cmd>tab Gvdiffsplit<CR>")
+            kmap('n', '<leader>dc', "<cmd>tabclose<CR>")
+        end
+    }
+
+    use {
         'nvim-lualine/lualine.nvim',
         config = function()
             require('lualine').setup({
