@@ -35,3 +35,10 @@ vim.opt.guifont = {
     'FiraCode Nerd Font:h11',
     'SauceCodePro Nerd Font:h11',
 }
+
+vim.cmd [[
+augroup YankHighlight
+    au!
+    au TextYankPost * silent! lua require('highlight').on_yank()
+augroup END
+]]
