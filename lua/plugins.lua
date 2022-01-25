@@ -252,6 +252,7 @@ return require('packer').startup(function()
         config = function()
             kmap('n', '<leader>ds', "<cmd>tab Gvdiffsplit<CR>")
             kmap('n', '<leader>dc', "<cmd>tabclose<CR>")
+            kmap('n', '<leader>dg', "<cmd>Git<CR>")
         end
     }
 
