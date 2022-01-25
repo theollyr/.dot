@@ -12,7 +12,19 @@ end
 
 function kmap(modes, keys, cmd, args)
     local opts = args or { silent = true, noremap = true, }
-    vim.api.nvim_set_keymap(modes, keys, cmd, opts)
+
+    if vim.version().api_level >= 9 then
+        vim.keymap.set(modes, keys, cmd, opts)
+    else
+        if opts.buffer then
+            local bufnr = opts.buffer
+            opts['buffer'] = nil
+
+            vim.api.nvim_buf_set_keymap(bufnr, modes, keys, cmd, opts)
+        else
+            vim.api.nvim_set_keymap(modes, keys, cmd, opts)
+        end
+    end
 end
 
 return require('packer').startup(function()
@@ -179,16 +191,6 @@ return require('packer').startup(function()
             require('gitsigns').setup({
                 signcolumn = true,
 
-                keymaps = {
-                    noremap = true,
-
-                    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" },
-                    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" },
-
-                    ['n <leader>hp'] = '<cmd>Gitsigns preview_hunk<CR>',
-                    ['n <leader>hs'] = '<cmd>Gitsigns stage_hunk<CR>',
-                },
-
                 current_line_blame = true,
                 current_line_blame_opts = {
                     virt_text = true,
@@ -197,9 +199,26 @@ return require('packer').startup(function()
                 current_line_blame_formatter_opts = {
                     relative_time = true,
                 },
-            })
 
-            vim.cmd [[hi! link GitSignsCurrentLineBlame Comment]]
+                on_attach = function(bufnr)
+                    local gs = require('gitsigns')
+
+                    local opts = { silent = true, noremap = true, expr = true, buffer = bufnr, }
+                    kmap('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", opts)
+                    kmap('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", opts)
+
+                    opts = { silent = true, noremap = true, buffer = bufnr, }
+                    kmap({ 'n', 'v', }, '<leader>hs', gs.stage_hunk, opts)
+                    kmap({ 'n', 'v', }, '<leader>hr', gs.reset_hunk, opts)
+
+                    kmap('n', '<leader>hp', gs.preview_hunk, opts)
+
+                    -- object
+                    kmap({ 'o', 'x', }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', opts)
+
+                    vim.cmd [[hi! link GitSignsCurrentLineBlame Comment]]
+                end,
+            })
         end
     }
 
