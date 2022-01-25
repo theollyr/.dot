@@ -196,6 +196,31 @@ return require('packer').startup(function()
                     virt_text = true,
                     delay = 5000,
                 },
+
+                current_line_blame_formatter = function(name, blame_info, opts)
+                    if blame_info.author == name then
+                        blame_info.author = 'You'
+                    end
+
+                    local text
+                    if blame_info.author == 'Not Committed Yet' then
+                        text = 'You • Uncommitted changes'
+                    else
+                        local date_time
+
+                        local author_time = tonumber(blame_info['author_time'])
+                        if opts.relative_time then
+                            date_time = require('gitsigns.util').get_relative_time(author_time)
+                        else
+                            date_time = os.date('%Y-%m-%d', author_time)
+                        end
+
+                        text = string.format('%s, %s • %s', blame_info.author, date_time, blame_info.summary)
+                    end
+
+                    return {{' '..text, 'Comment'}}
+                end,
+
                 current_line_blame_formatter_opts = {
                     relative_time = true,
                 },
@@ -215,8 +240,6 @@ return require('packer').startup(function()
 
                     -- object
                     kmap({ 'o', 'x', }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', opts)
-
-                    vim.cmd [[hi! link GitSignsCurrentLineBlame Comment]]
                 end,
             })
         end
