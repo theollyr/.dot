@@ -223,7 +223,7 @@ return require('packer').startup(function()
                     component_separators = '',
                 },
                 sections = {
-                    lualine_x = { 'encoding', 'fileformat', 'filetype', 'lsp_progress' },
+                    lualine_x = { 'lsp_progress', 'encoding', 'fileformat', 'filetype', },
                 },
                 inactive_sections = {
                     lualine_x = { 'location', },
