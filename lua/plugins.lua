@@ -72,6 +72,7 @@ return require('packer').startup(function()
     use {
         'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim',
+        keys = { { 'n', '<leader>f' }, { 'n', '<leader><leader>' }, },
         config = function()
             local remap_preview_scrolls = {
                 -- remove default <C-u> and <C-d> for scrolling
@@ -204,6 +205,8 @@ return require('packer').startup(function()
 
     use {
         'tpope/vim-fugitive',
+        keys = { { 'n', '<leader>d' }, },
+        cmd = { 'Git', 'G', },
         config = function()
             kmap('n', '<leader>ds', "<cmd>tab Gvdiffsplit<CR>")
             kmap('n', '<leader>dc', "<cmd>tabclose<CR>")
@@ -360,6 +363,7 @@ return require('packer').startup(function()
     use {
         'simrat39/rust-tools.nvim',
         after = { 'nvim-lspconfig', 'nvim-cmp' },
+        ft = { 'rust', 'toml', },
         config = function()
             -- Use an on_attach function to only map the following keys
             -- after the language server attaches to the current buffer
