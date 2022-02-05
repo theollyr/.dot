@@ -78,6 +78,17 @@ return require('packer').startup(function()
                 vim.cmd('hi clear ' .. hig)
                 vim.cmd(string.format("hi %s guibg=%s", hig, bg))
             end
+
+            -- disable italic on comments but keep it for line blame
+            vim.cmd [[
+                hi clear GitSignsCurrentLineBlame
+                hi GitSignsCurrentLineBlame guifg=#928374 gui=italic
+
+                hi Comment gui=NONE
+
+                hi clear TSComment
+                hi! link TSComment Comment
+            ]]
         end
     }
 
@@ -218,7 +229,7 @@ return require('packer').startup(function()
                         text = string.format('%s, %s • %s', blame_info.author, date_time, blame_info.summary)
                     end
 
-                    return {{' '..text, 'Comment'}}
+                    return {{' '..text, 'GitSignsCurrentLineBlame'}}
                 end,
 
                 current_line_blame_formatter_opts = {
