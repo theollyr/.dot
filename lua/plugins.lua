@@ -162,7 +162,7 @@ return require('packer').startup(function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = {
                     'bash', 'c', 'devicetree', 'fish', 'json', 'lua', 'make',
-                    'python', 'rust', 'vim', 'yaml', 'zig',
+                    'markdown', 'python', 'rust', 'vim', 'yaml', 'zig',
                 },
 
                 highlight = {
