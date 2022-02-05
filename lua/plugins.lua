@@ -393,7 +393,7 @@ return require('packer').startup(function()
         requires = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
+            'quangnguyen30192/cmp-nvim-tags',
         },
         after = 'nvim-lspconfig',
         config = function()
@@ -408,7 +408,14 @@ return require('packer').startup(function()
                 },
                 sources = {
                     { name = 'nvim_lsp', },
-                    { name = 'buffer', },
+                    { name = 'tags', },
+                    {
+                        name = 'buffer',
+                        option = {
+                            -- gather completion from all open buffers
+                            get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+                        },
+                    },
                 },
             })
         end
