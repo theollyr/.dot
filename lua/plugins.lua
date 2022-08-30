@@ -67,7 +67,7 @@ return require('packer').startup(function()
             -- disable italic on comments but keep it for line blame
             vim.cmd [[
                 hi clear GitSignsCurrentLineBlame
-                hi GitSignsCurrentLineBlame guifg=#928374 gui=italic
+                hi GitSignsCurrentLineBlame guifg=#928374 cterm=italic gui=italic
 
                 hi Comment cterm=NONE gui=NONE
 
