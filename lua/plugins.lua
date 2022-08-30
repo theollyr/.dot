@@ -382,11 +382,12 @@ return require('packer').startup(function()
 
             local cmp = require('cmp')
             cmp.setup({
-                mapping = {
-                    ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c', }),
-                    ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c', }),
-                    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c', }),
-                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-j>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-e>'] = cmp.mapping.abort(),
+                }),
                 sources = {
                     { name = 'nvim_lsp', },
                     { name = 'tags', },
