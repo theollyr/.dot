@@ -475,6 +475,10 @@ return require('packer').startup(function()
 
             kmap('n', 'gi', '<Plug>(LiveEasyAlign)', {})
             kmap('x', 'gi', '<Plug>(LiveEasyAlign)', {})
+
+            vim.g.easy_align_delimiters = {
+                ['\\'] = { pattern = '\\\\' },
+            }
         end
     }
 
