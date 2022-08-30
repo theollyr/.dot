@@ -95,7 +95,7 @@ return require('packer').startup(function()
     use {
         'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        keys = { { 'n', '<leader>f' }, { 'n', '<leader><leader>' }, },
+        -- keys = { { 'n', '<leader>f' }, { 'n', '<leader><leader>' }, },
         config = function()
             local remap_preview_scrolls = {
                 -- remove default <C-u> and <C-d> for scrolling
