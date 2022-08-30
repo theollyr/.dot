@@ -10,22 +10,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     })
 end
 
-function kmap(modes, keys, cmd, args)
-    local opts = args or { silent = true, noremap = true, }
-
-    if vim.version().api_level >= 9 then
-        vim.keymap.set(modes, keys, cmd, opts)
-    else
-        if opts.buffer then
-            local bufnr = opts.buffer
-            opts['buffer'] = nil
-
-            vim.api.nvim_buf_set_keymap(bufnr, modes, keys, cmd, opts)
-        else
-            vim.api.nvim_set_keymap(modes, keys, cmd, opts)
-        end
-    end
-end
+kmap = require('utils').kmap
 
 return require('packer').startup(function()
     -- Packer itself
