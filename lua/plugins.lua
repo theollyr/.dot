@@ -360,13 +360,7 @@ return require('packer').startup(function()
 
     use {
         'onsails/diaglist.nvim',
-        after = {
-            'nvim-lspconfig',
-
-            -- the one that actually initializes LSP
-            -- TODO: initialize LSP on its own
-            'rust-tools.nvim',
-        },
+        ft = { 'zig', 'rust', },
         config = function()
             require('diaglist').init()
 
