@@ -405,6 +405,7 @@ return require('packer').startup(function()
 
     use {
         'simrat39/rust-tools.nvim',
+        opt = true,
         after = { 'nvim-lspconfig', 'nvim-cmp' },
         ft = { 'rust', 'toml', },
         config = function()
