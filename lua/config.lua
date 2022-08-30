@@ -42,3 +42,5 @@ augroup YankHighlight
     au TextYankPost * silent! lua require('highlight').on_yank()
 augroup END
 ]]
+
+require('utils').kmap('n', '<leader>o', '<C-^>', { silent = true, })
