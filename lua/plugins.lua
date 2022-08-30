@@ -201,28 +201,22 @@ return require('packer').startup(function()
                         blame_info.author = 'You'
                     end
 
-                    local text
-                    if blame_info.author == 'Not Committed Yet' then
-                        text = 'You • Uncommitted changes'
+                    local date_time
+
+                    local author_time = tonumber(blame_info['author_time'])
+                    if opts.relative_time then
+                        date_time = require('gitsigns.util').get_relative_time(author_time)
                     else
-                        local date_time
-
-                        local author_time = tonumber(blame_info['author_time'])
-                        if opts.relative_time then
-                            date_time = require('gitsigns.util').get_relative_time(author_time)
-                        else
-                            date_time = os.date('%Y-%m-%d', author_time)
-                        end
-
-                        text = string.format('%s, %s • %s', blame_info.author, date_time, blame_info.summary)
+                        date_time = os.date('%Y-%m-%d', author_time)
                     end
 
+                    text = string.format('%s, %s • %s', blame_info.author, date_time, blame_info.summary)
                     return {{' '..text, 'GitSignsCurrentLineBlame'}}
                 end,
 
-                current_line_blame_formatter_opts = {
-                    relative_time = true,
-                },
+                current_line_blame_formatter_nc = function(name, blame_info, opts)
+                    return {{' Unknown • Uncommitted changes ', 'GitSignsCurrentLineBlame'}}
+                end,
 
                 on_attach = function(bufnr)
                     local gs = require('gitsigns')
