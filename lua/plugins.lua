@@ -377,7 +377,6 @@ return require('packer').startup(function()
             'hrsh7th/cmp-buffer',
             'quangnguyen30192/cmp-nvim-tags',
         },
-        after = 'nvim-lspconfig',
         config = function()
             vim.opt.completeopt = { 'menu', 'menuone', 'noselect', }
 
