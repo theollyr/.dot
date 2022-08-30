@@ -258,6 +258,14 @@ return require('packer').startup(function()
     use {
         'nvim-lualine/lualine.nvim',
         config = function()
+            local filename = {
+                'filename',
+                path = 1,
+                symbols = {
+                    readonly = '[RO]',
+                },
+            }
+
             require('lualine').setup({
                 options = {
                     theme = 'gruvbox',
@@ -265,9 +273,11 @@ return require('packer').startup(function()
                     component_separators = '',
                 },
                 sections = {
+                    lualine_c = { filename, },
                     lualine_x = { 'lsp_progress', 'encoding', 'fileformat', 'filetype', },
                 },
                 inactive_sections = {
+                    lualine_c = { filename, },
                     lualine_x = { 'location', },
                 },
             })
