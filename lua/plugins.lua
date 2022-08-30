@@ -395,7 +395,7 @@ return require('packer').startup(function()
                         name = 'buffer',
                         option = {
                             -- gather completion from all open buffers
-                            get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+                            get_bufnrs = function() return { vim.api.nvim_get_current_buf() } end,
                         },
                     },
                 },
