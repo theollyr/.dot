@@ -442,6 +442,30 @@ return require('packer').startup(function()
         end
     }
 
+    use {
+        'ziglang/zig.vim',
+        opt = true,
+        ft = { 'zig', },
+        config = function()
+            local lsp = require('lsp')
+            require('lspconfig').zls.setup({
+                on_attach = lsp.on_attach,
+                capabilities = lsp.capabilities(),
+            })
+        end
+    }
+
+    use {
+        'junegunn/vim-easy-align',
+        config = function()
+            kmap('n', 'ga', '<Plug>(EasyAlign)', {})
+            kmap('x', 'ga', '<Plug>(EasyAlign)', {})
+
+            kmap('n', 'gi', '<Plug>(LiveEasyAlign)', {})
+            kmap('x', 'gi', '<Plug>(LiveEasyAlign)', {})
+        end
+    }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
