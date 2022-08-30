@@ -230,6 +230,7 @@ return require('packer').startup(function()
                     kmap({ 'n', 'v', }, '<leader>hr', gs.reset_hunk, opts)
 
                     kmap('n', '<leader>hp', gs.preview_hunk, opts)
+                    kmap('n', '<leader>hb', gs.blame_line, opts)
 
                     -- object
                     kmap({ 'o', 'x', }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', opts)
