@@ -69,7 +69,7 @@ return require('packer').startup(function()
                 hi clear GitSignsCurrentLineBlame
                 hi GitSignsCurrentLineBlame guifg=#928374 gui=italic
 
-                hi Comment gui=NONE
+                hi Comment cterm=NONE gui=NONE
 
                 hi clear TSComment
                 hi! link TSComment Comment
