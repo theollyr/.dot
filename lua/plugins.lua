@@ -73,6 +73,9 @@ return require('packer').startup(function()
 
                 hi clear TSComment
                 hi! link TSComment Comment
+
+                " ellisonleao/gruvbox.nvim#e57dd85 made it italic
+                hi String cterm=NONE gui=NONE
             ]]
         end
     }
