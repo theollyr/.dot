@@ -28,3 +28,4 @@ function clink() {
 }
 
 clink .config/nvim
+clink .tmux.conf
