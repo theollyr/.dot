@@ -488,6 +488,21 @@ return require('packer').startup(function()
         end
     }
 
+    use {
+        'p00f/clangd_extensions.nvim',
+        opt = true,
+        ft = { 'c', 'cpp', },
+        config = function()
+            local lsp = require('lsp')
+            require('clangd_extensions').setup({
+                server = {
+                    on_attach = lsp.on_attach,
+                    capabilities = lsp.capabilities(),
+                },
+            })
+        end
+    }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
