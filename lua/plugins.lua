@@ -393,9 +393,10 @@ return require('packer').startup(function()
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.abort(),
                 }),
-                sources = {
+                sources = cmp.config.sources({
                     { name = 'nvim_lsp', },
                     { name = 'tags', },
+                }, {
                     {
                         name = 'buffer',
                         option = {
@@ -403,7 +404,7 @@ return require('packer').startup(function()
                             get_bufnrs = function() return { vim.api.nvim_get_current_buf() } end,
                         },
                     },
-                },
+                }),
             })
         end
     }
@@ -459,6 +460,15 @@ return require('packer').startup(function()
                 on_attach = lsp.on_attach,
                 capabilities = lsp.capabilities(),
             })
+        end
+    }
+
+    use {
+        'vlime/vlime',
+        opt = true,
+        ft = { 'lisp', },
+        config = function()
+            vim.g.vlime_cl_impl = 'ccl'
         end
     }
 
