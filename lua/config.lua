@@ -43,4 +43,8 @@ augroup YankHighlight
 augroup END
 ]]
 
+-- When pressing <C-6>, Neovide actually sends <C-6> and not <C-^> which is
+-- what happens in a terminal. Map it to <C-^> so the behaviour is consistent.
+require('utils').kmap('n', '<C-6>', '<C-^>', { silent = true, })
+
 require('utils').kmap('n', '<leader>o', '<C-^>', { silent = true, })
